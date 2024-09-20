@@ -3,11 +3,11 @@ import "../assets/style/main.css";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slice/userSlice";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Connect() {
   const [email, setEmail] = useState();
@@ -19,10 +19,16 @@ function Connect() {
   const handleCLick = (e) => {
     e.preventDefault();
     dispatch(login({ email, password })).then((reponse) => {
+      if (reponse.payload) {
         navigate(`/connect/user`);
+      } else {
+        alert("incorrect");
+      }
     });
   };
 
+  const token = useSelector((state) => state.token);
+  console.log(token);
   return (
     <div className="body">
       <Header />

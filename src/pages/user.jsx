@@ -5,8 +5,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Box from "../components/box";
+import { useEffect } from "react";
+import { UseSelector , useDispatch, useSelector} from "react-redux";
+import { getProfile } from "../slice/userSlice";
+
+
+
+
 
 function User() {
+  
+  
+    const token = useSelector((state) => state.token);
+   const dispatch = useDispatch();
+  
+    useEffect ( () => {
+      dispatch (getProfile(token));
+    },[dispatch,token])
+
   return (
     <div className="body">
       <Header>
