@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
+
+
 const initialState = {
   token: null,
   currentUser: {},
@@ -24,6 +26,8 @@ const userSlice = createSlice({
       state.loading = false;
       state.isLoggedIn = false;
     },
+   
+  
   },
 
   extraReducers: (builder) => {
@@ -41,13 +45,20 @@ const userSlice = createSlice({
       localStorage.clear();
     });
 
-    builder.addCase(getProfile.fulfilled, (state, action) => {
+    builder.addCase(getUser.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(getUser.fulfilled, (state, action) => {
+      state.loading = false;
       state.currentUser = action.payload;
-      state.error = false;
+      state.error = null;
+    })
+    .addCase(getUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
-    builder.addCase(getProfile.rejected, (state, action) => {
-      state.error = "error";
-    });
+    
+    
   },
 });
 
@@ -57,47 +68,25 @@ export const login = createAsyncThunk("userSlice/login", async (userData) => {
     userData
   );
 
-  //console.log(data);
-  return data;
-});
-
-
-
-
-/*export const getProfile = createAsyncThunk("userSlice/getProfile", async ({getUser} )=> {
-
-  const token = "getState().userSlice.token"
-  const { data } = await axios.get(
-    "http://localhost:3001/api/v1/user/profile",
-    {getUser},
-    {
-        headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
-  console.log(data);
-  return data.body;
-});*/
-
-
-export const getProfile = createAsyncThunk("userSlice/getProfile", async(token) => {
-  console.log(token);
-   
-  const { data } = await axios.get(
-    "http://localhost:3001/api/v1/user/profile",
-    {token},
-    {
-      headers: {
-        "Content-Type": 'application/json',
-        Authorization : `Bearer ${token}`
-      }
-    }
-  );
-  // console.log("data.body");
+  console.log(data.body);
   return data.body;
 });
 
-export const { logout } = userSlice.actions;
+
+export const getUser = createAsyncThunk("user/getUser", async (token) => {
+  const {data} = await axios.get("http://localhost:3001/api/v1/user/profile", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data.body;
+});
+
+
+
+
+
+export const { logout, setToken } = userSlice.actions;
 export default userSlice.reducer;
+
+

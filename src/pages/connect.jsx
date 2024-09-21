@@ -4,7 +4,6 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useState } from "react";
@@ -18,8 +17,8 @@ function Connect() {
 
   const handleCLick = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })).then((reponse) => {
-      if (reponse.payload) {
+    dispatch(login({ email, password })).then((response) => {
+      if (response.payload) {
         navigate(`/connect/user`);
       } else {
         alert("incorrect");
