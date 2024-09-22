@@ -11,7 +11,7 @@ import { useState } from "react";
 function Connect() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,6 +25,9 @@ function Connect() {
       }
     });
   };
+
+
+ 
 
   const token = useSelector((state) => state.token);
   console.log(token);

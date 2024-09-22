@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
 import axios from "axios";
-
-
 
 const initialState = {
   token: null,
@@ -26,8 +23,6 @@ const userSlice = createSlice({
       state.loading = false;
       state.isLoggedIn = false;
     },
-   
-  
   },
 
   extraReducers: (builder) => {
@@ -45,20 +40,31 @@ const userSlice = createSlice({
       localStorage.clear();
     });
 
-    builder.addCase(getUser.pending, (state) => {
-      state.loading = true;
-    })
-    .addCase(getUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.currentUser = action.payload;
-      state.error = null;
-    })
-    .addCase(getUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    
-    
+    builder
+      .addCase(getUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = action.payload;
+        state.error = null;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+      builder
+      .addCase(postUserName.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(postUserName.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(postUserName.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
@@ -72,21 +78,35 @@ export const login = createAsyncThunk("userSlice/login", async (userData) => {
   return data.body;
 });
 
-
 export const getUser = createAsyncThunk("user/getUser", async (token) => {
-  const {data} = await axios.get("http://localhost:3001/api/v1/user/profile", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const { data } = await axios.get(
+    "http://localhost:3001/api/v1/user/profile",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return data.body;
 });
 
 
+export const postUserName = createAsyncThunk("user/postUserName", async ({ token, userName }) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
+  try {
+    const { data } = await axios.put("http://localhost:3001/api/v1/user/profile", { userName }, config);
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+});
 
 
 export const { logout, setToken } = userSlice.actions;
 export default userSlice.reducer;
-
-

@@ -59,6 +59,13 @@ html {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  display:flex;
+  gap:5px;
+}
+
+.space{
+  display:flex;
+  gap:10px;
 }
 
 .main-nav-item:hover {
@@ -293,4 +300,51 @@ html {
   .transaction-button {
     width: 200px;
   }
+}
+
+.error-message{
+  text-align: end;
+  font-size: 9px;
+  color : red;
+  margin: 0px;
+}
+
+.envoi{
+  background-color: white;
+  width : max-content;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top:20px;
+  padding: 20px;
+}
+
+.envoi div {
+  padding:5px
+}
+
+.envoi input {
+  border-radius: 5px;
+  
+}
+.envoi div {
+padding: 5px;
+display: flex;
+justify-content: center;
+gap: 10px;
+}
+
+.envoi button {
+  width:50%;
+  margin-top:10px;
+}
+
+#firstname , #lastname {
+  background-color: #d5d1d1;
+  color: #726262;
+}
+
+fieldset{
+  border:none;
+  font-size: 22px;
+  font-weight: bold;
 }
