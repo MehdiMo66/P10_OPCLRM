@@ -73,8 +73,6 @@ export const login = createAsyncThunk("userSlice/login", async (userData) => {
     "http://localhost:3001/api/v1/user/login",
     userData
   );
-
-  console.log(data.body);
   return data.body;
 });
 
@@ -102,7 +100,6 @@ export const postUserName = createAsyncThunk("user/postUserName", async ({ token
     const { data } = await axios.put("http://localhost:3001/api/v1/user/profile", { userName }, config);
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 });

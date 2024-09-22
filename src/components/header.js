@@ -15,7 +15,6 @@ function Header({ currentUser }) {
     dispatch(logout());
   };
 
-
   return (
     <nav className="main-nav">
       <a className="main-nav-logo" href="../pages/home.jsx">

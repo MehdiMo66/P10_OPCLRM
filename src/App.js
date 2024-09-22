@@ -2,11 +2,10 @@ import Home from "./pages/home";
 import Connect from "./pages/connect";
 import User from "./pages/user";
 import Ntm from "./pages/error";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { login } from "./slice/userSlice";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+
 
 function App() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);

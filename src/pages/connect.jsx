@@ -4,14 +4,14 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useState } from "react";
 
 function Connect() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
- 
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,11 +26,6 @@ function Connect() {
     });
   };
 
-
- 
-
-  const token = useSelector((state) => state.token);
-  console.log(token);
   return (
     <div className="body">
       <Header />
