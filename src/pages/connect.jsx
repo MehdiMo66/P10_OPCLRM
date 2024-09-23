@@ -1,14 +1,15 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../assets/style/main.css";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import "../assets/style/main.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-function Connect() {
+export default function Connect() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -17,6 +18,7 @@ function Connect() {
 
   const handleCLick = (e) => {
     e.preventDefault();
+
     dispatch(login({ email, password })).then((response) => {
       if (response.payload) {
         navigate(`/connect/user`);
@@ -65,5 +67,3 @@ function Connect() {
     </div>
   );
 }
-
-export default Connect;

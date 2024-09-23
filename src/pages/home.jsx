@@ -1,12 +1,12 @@
 import iconChat from "../assets/img/icon-chat.png";
 import iconMoney from "../assets/img/icon-money.png";
 import iconSecurity from "../assets/img/icon-security.png";
-import "../assets/style/main.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Circle from "../components/circle";
+import "../assets/style/main.css";
 
-function Home() {
+export default function Home() {
   return (
     <div className="body">
       <Header />
@@ -48,4 +48,3 @@ function Home() {
   );
 }
 
-export default Home;

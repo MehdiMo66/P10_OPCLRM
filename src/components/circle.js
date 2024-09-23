@@ -1,4 +1,4 @@
-function Circle({ icon, title, description }) {
+export default function Circle({ icon, title, description }) {
   return (
     <div className="feature-item">
       <img src={icon} alt="Chat Icon" className="feature-icon" />
@@ -8,4 +8,3 @@ function Circle({ icon, title, description }) {
   );
 }
 
-export default Circle;

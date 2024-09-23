@@ -7,8 +7,9 @@ import { logout } from "../slice/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
-function Header({ currentUser }) {
+export default function Header({ hideSignIn }) {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const user = useSelector((state) => state.currentUser);
 
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -17,20 +18,19 @@ function Header({ currentUser }) {
 
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" href="../pages/home.jsx">
+      <Link className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
           src={argentBankLogo}
           alt="Argent Bank Logo"
         />
-        <h1 className="sr-only">Argent Bank</h1>
-      </a>
+      </Link>
 
       {isLoggedIn ? (
         <div className="space">
-          <Link className="main-nav-item">
+          <Link className="main-nav-item" to="connect/user">
             <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
-            {currentUser}
+            <span>{user.userName}</span>
           </Link>
           <Link className="main-nav-item" to="/" onClick={handleLogout}>
             <FontAwesomeIcon icon={faSignOut} />
@@ -39,14 +39,16 @@ function Header({ currentUser }) {
         </div>
       ) : (
         <div>
-          <Link className="main-nav-item" to="/connect">
-            <FontAwesomeIcon icon={faUserCircle} />
-            Sign In
-          </Link>
+          {!hideSignIn && (
+            <Link className="main-nav-item" to="/connect">
+              <FontAwesomeIcon icon={faUserCircle} />
+              Sign In
+            </Link>
+          )}
         </div>
       )}
     </nav>
   );
 }
 
-export default Header;
+

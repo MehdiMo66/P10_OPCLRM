@@ -3,11 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  token: null,
+  token: localStorage.getItem('token') || '',
   currentUser: {},
   isLoggedIn: false,
   loading: false,
   error: null,
+  
+
 };
 
 const userSlice = createSlice({
@@ -17,7 +19,7 @@ const userSlice = createSlice({
   reducers: {
     logout(state) {
       state.token = null;
-      sessionStorage.clear();
+      localStorage.clear();
       state.currentUser = {};
       state.error = null;
       state.loading = false;
@@ -28,7 +30,7 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.token = action.payload.token;
-      sessionStorage.setItem("token", action.payload.token);
+      localStorage.setItem("token", action.payload.token);
       state.error = false;
       state.isLoggedIn = true;
     });
@@ -53,7 +55,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-      builder
+    builder
       .addCase(postUserName.pending, (state) => {
         state.loading = true;
       })
@@ -89,21 +91,21 @@ export const getUser = createAsyncThunk("user/getUser", async (token) => {
 });
 
 
-export const postUserName = createAsyncThunk("user/postUserName", async ({ token, userName }) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  try {
-    const { data } = await axios.put("http://localhost:3001/api/v1/user/profile", { userName }, config);
+export const postUserName = createAsyncThunk(
+  "user/postUserName",
+  async ({ token, userName }) => {
+    const { data } = await axios.put(
+      "http://localhost:3001/api/v1/user/profile",
+      { userName },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return data;
-  } catch (error) {
-    throw error;
   }
-});
-
+);
 
 export const { logout, setToken } = userSlice.actions;
 export default userSlice.reducer;

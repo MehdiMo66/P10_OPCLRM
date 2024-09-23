@@ -38,7 +38,9 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
       } else if (!/[a-zA-Z]{4,}/.test(user)) {
         setError("Le nom d'utilisateur doit contenir au moins 4 lettres.");
       } else if (!/^[a-zA-Z0-9]*$/.test(user)) {
-        setError("Le nom d'utilisateur doit contenir uniquement des caractères alphanumériques");
+        setError(
+          "Le nom d'utilisateur doit contenir uniquement des caractères alphanumériques"
+        );
       } else if (user.replace(/[^0-9]/g, "").length > 3) {
         setError("Le nom d'utilisateur ne peut contenir plus de 3 chiffres.");
       }

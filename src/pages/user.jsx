@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "../slice/userSlice";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import "../assets/style/main.css";
 import Edit from "../components/edit";
 import Box from "../components/box";
-sessionStorage.getItem("token");
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../slice/userSlice";
 
-function User() {
+export default function User() {
   const token = useSelector((state) => state.token);
   const currentUser = useSelector((state) => state.currentUser);
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +19,7 @@ function User() {
 
   return (
     <div className="body">
-      <Header currentUser={currentUser.userName} />
+      <Header />
       <main className="main bg-dark">
         {isOpen ? null : (
           <div className="header">
@@ -66,5 +65,3 @@ function User() {
     </div>
   );
 }
-
-export default User;

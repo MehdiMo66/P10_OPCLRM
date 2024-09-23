@@ -303,6 +303,36 @@ html {
 }
 
 
+.main-error{
+  padding:155px
+}
+
+.main-error p {
+  color : #00bc77;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 35px;
+}
+
+.redirect-home {
+  display: inline-block;
+  text-decoration: none;
+  color:white;
+}
+
+.redirect-home:hover{
+  text-decoration: underline;
+}
+
+
+.error-title {
+  color: #00bc77;
+  font-size: 100px;
+  padding-bottom: 0px;
+  margin: 0px;
+}
+
 h2{
   color:white;
   padding-top:20px;

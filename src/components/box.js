@@ -1,4 +1,4 @@
-function Box({ title, ammount, description }) {
+export default function Box({ title, ammount, description }) {
   return (
     <section className="account">
       <div className="account-content-wrapper">
@@ -13,4 +13,4 @@ function Box({ title, ammount, description }) {
   );
 }
 
-export default Box;
+
