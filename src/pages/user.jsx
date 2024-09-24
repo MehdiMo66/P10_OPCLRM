@@ -1,5 +1,3 @@
-import Header from "../components/header";
-import Footer from "../components/footer";
 import "../assets/style/main.css";
 import Edit from "../components/edit";
 import Box from "../components/box";
@@ -8,21 +6,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../slice/userSlice";
 
 export default function User() {
-
   const token = useSelector((state) => state.token);
   const currentUser = useSelector((state) => state.currentUser);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  localStorage.getItem('apiResponse')
- 
+  localStorage.getItem("apiResponse");
+
   useEffect(() => {
     dispatch(getUser(token));
   }, [dispatch, token]);
 
-
   return (
     <div className="body">
-      <Header />
       <main className="main bg-dark">
         {isOpen ? null : (
           <div className="header">
@@ -64,9 +59,6 @@ export default function User() {
           description="Current Balance"
         />
       </main>
-      <Footer />
     </div>
   );
 }
-
-

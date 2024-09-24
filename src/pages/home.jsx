@@ -1,15 +1,12 @@
 import iconChat from "../assets/img/icon-chat.png";
 import iconMoney from "../assets/img/icon-money.png";
 import iconSecurity from "../assets/img/icon-security.png";
-import Header from "../components/header";
-import Footer from "../components/footer";
 import Circle from "../components/circle";
 import "../assets/style/main.css";
 
 export default function Home() {
   return (
     <div className="body">
-      <Header />
       <main>
         <div className="hero">
           <section className="hero-content">
@@ -43,8 +40,6 @@ export default function Home() {
           />
         </section>
       </main>
-      <Footer />
     </div>
   );
 }
-

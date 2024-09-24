@@ -1,37 +1,33 @@
-import Header from "../components/header";
-import Footer from "../components/footer";
 import "../assets/style/main.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useState } from "react";
 
 export default function Connect() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error , setError ] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state)=> state.isLoggedIn)
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const handleCLick = (e) => {
     e.preventDefault();
 
     dispatch(login({ email, password })).then((response) => {
       if (response.payload) {
-        localStorage.setItem('apiResponse', JSON.stringify(response.payload))
+        localStorage.setItem("apiResponse", JSON.stringify(response.payload));
         navigate(`/connect/user`);
-      
       } else {
-        setError("Erreur sur le mot de passe ou l'identifiant.")
+        setError("Erreur sur le mot de passe ou l'identifiant.");
       }
     });
   };
 
   return (
     <div className="body">
-      <Header />
       <main className="main bg-dark">
         <section className="sign-in-content">
           <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
@@ -64,7 +60,6 @@ export default function Connect() {
           </form>
         </section>
       </main>
-      <Footer />
     </div>
   );
 }
