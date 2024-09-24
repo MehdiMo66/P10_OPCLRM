@@ -4,26 +4,27 @@ import "../assets/style/main.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 export default function Connect() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error , setError ] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const isLoggedIn = useSelector((state)=> state.isLoggedIn)
   const handleCLick = (e) => {
     e.preventDefault();
 
     dispatch(login({ email, password })).then((response) => {
       if (response.payload) {
+        localStorage.setItem('apiResponse', JSON.stringify(response.payload))
         navigate(`/connect/user`);
+      
       } else {
-        alert("incorrect");
+        setError("Erreur sur le mot de passe ou l'identifiant.")
       }
     });
   };
@@ -56,10 +57,10 @@ export default function Connect() {
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-
             <button onClick={handleCLick} className="sign-in-button">
               Sign In
             </button>
+            {!isLoggedIn ? <span className="connect-error">{error}</span> : ""}
           </form>
         </section>
       </main>

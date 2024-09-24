@@ -8,14 +8,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../slice/userSlice";
 
 export default function User() {
+
   const token = useSelector((state) => state.token);
   const currentUser = useSelector((state) => state.currentUser);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-
+  localStorage.getItem('apiResponse')
+ 
   useEffect(() => {
     dispatch(getUser(token));
   }, [dispatch, token]);
+
 
   return (
     <div className="body">
@@ -65,3 +68,5 @@ export default function User() {
     </div>
   );
 }
+
+

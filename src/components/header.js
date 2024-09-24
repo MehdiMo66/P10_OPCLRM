@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header({ hideSignIn }) {
+  
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = useSelector((state) => state.currentUser);
 
@@ -28,7 +29,7 @@ export default function Header({ hideSignIn }) {
 
       {isLoggedIn ? (
         <div className="space">
-          <Link className="main-nav-item" to="connect/user">
+          <Link className="main-nav-item" to="/connect/user">
             <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
             <span>{user.userName}</span>
           </Link>

@@ -3,12 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  token: localStorage.getItem('token') || '',
+  token: null,
   currentUser: {},
   isLoggedIn: false,
   loading: false,
   error: null,
-  
+
 
 };
 
@@ -50,6 +50,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.currentUser = action.payload;
         state.error = null;
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
@@ -62,6 +63,7 @@ const userSlice = createSlice({
       .addCase(postUserName.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(postUserName.rejected, (state, action) => {
         state.loading = false;

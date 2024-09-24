@@ -302,6 +302,11 @@ html {
   }
 }
 
+.connect-error{
+  font-size: 11px;
+  color: red;
+}
+
 
 .main-error{
   padding:155px
