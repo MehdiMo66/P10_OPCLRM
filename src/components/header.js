@@ -1,5 +1,5 @@
 import "../assets/style/main.css";
-import argentBankLogo from "../assets/img/argentBankLogo.png";
+import argentBankLogo from "../assets/img/argentBankLogo.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";

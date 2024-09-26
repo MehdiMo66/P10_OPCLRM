@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 export default function Edit({ username, firstname, lastname, cancelEdit }) {
   const token = useSelector((state) => state.token);
+  const currentUser = useSelector((state) => state.currentUser);
+
   const dispatch = useDispatch();
   const [user, setUser] = useState(username || "");
   const [submitted, setSubmitted] = useState(false);
@@ -20,6 +22,13 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (user === currentUser.userName) {
+      // Vérifie si le pseudo saisi est identique au pseudo actuel
+      setError(
+        "Le pseudo est identique à celui actuel. Veuillez saisir un nouveau pseudo."
+      );
+      return;
+    }
     if (
       (!submitted &&
         user.length >= 4 &&

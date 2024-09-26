@@ -78,16 +78,17 @@ html {
 }
 
 .main-nav-logo-image {
-  max-width: 100%;
+  height: 55px;
   width: 200px;
 }
 
 .hero {
-  background-image: url("../img/bank-tree.jpeg");
+  background-image: url("../img/bank-tree.webp");
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
   height: 300px;
+  width:100%;
   position: relative;
 }
 
@@ -116,6 +117,7 @@ html {
   .hero {
     height: 400px;
     background-position: 0% 33%;
+ 
   }
 
   .hero-content {
@@ -148,6 +150,7 @@ html {
 
 .feature-icon {
   width: 100px;
+  height: 100px;
   border: 10px solid #00bc77;
   border-radius: 50%;
   padding: 1rem;
