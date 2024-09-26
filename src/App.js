@@ -2,7 +2,7 @@ import Home from "./pages/home";
 import Connect from "./pages/connect";
 import User from "./pages/user";
 import Error from "./pages/page404";
-import Header from "./components/header"
+import Header from "./components/header";
 import Footer from "./components/footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,20 +13,19 @@ function App() {
 
   return (
     <Router>
-       <Header/>
+      <Header />
       <Routes>
-       
         <Route path="/" element={<Home />} />
         <Route path="/*" element={<Error />} />
         <Route path="/connect" element={<Connect />} />
         {isLoggedIn ? (
-          <Route path="connect/user" element={<User />} />
+          <Route path="connect/user" element={<User />} /> 
+        
         ) : (
-          <Route path="connect/user" element={<Navigate to="/" replace />} />
+          <Route path="connect/user" element={<Navigate to="/" replace />} /> 
         )}
-       
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }

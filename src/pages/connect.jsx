@@ -4,27 +4,36 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slice/userSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Connect() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [checked, isChecked] = useState(true);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
   const handleCLick = (e) => {
     e.preventDefault();
 
     dispatch(login({ email, password })).then((response) => {
       if (response.payload) {
-        localStorage.setItem("apiResponse", JSON.stringify(response.payload));
         navigate(`/connect/user`);
       } else {
         setError("Erreur sur le mot de passe ou l'identifiant.");
       }
     });
   };
+
+  //permet de ne pas afficher la page connect lorsque l'utilisateur est connecté
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="body">

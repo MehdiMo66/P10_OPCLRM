@@ -10,7 +10,7 @@ export default function User() {
   const currentUser = useSelector((state) => state.currentUser);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  localStorage.getItem("apiResponse");
+  //localStorage.getItem("apiResponse");
 
   useEffect(() => {
     dispatch(getUser(token));
