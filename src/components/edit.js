@@ -91,7 +91,7 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
         </form>
       ) : (
         <h2>
-          Pseudo changé avec succés ! <br /> Veuillez vous reconnecter pour le
+          Pseudo changé avec succés ! <br /> Veuillez recharger la page pour le
           mettre à jour.
         </h2>
       )}
