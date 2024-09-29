@@ -7,7 +7,7 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
   const currentUser = useSelector((state) => state.currentUser);
 
   const dispatch = useDispatch();
-  const [user, setUser] = useState(username || "");
+  const [user, setUser] = useState(currentUser.userName || "");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
@@ -18,6 +18,7 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
   const handleUsernameChange = (e) => {
     setUser(e.target.value);
     setError("");
+    
   };
 
   const handleFormSubmit = (e) => {
@@ -39,6 +40,7 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
       dispatch(postUserName({ token, userName: user }));
       setUser("");
       setSubmitted(true);
+      cancelEdit()
     } else {
       if (user.length < 4) {
         setError("Le nom d'utilisateur doit contenir au moins 4 caractères.");
@@ -58,52 +60,45 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
 
   return (
     <div>
-      {!submitted ? (
-        <form className="envoi" onSubmit={handleFormSubmit}>
-          <fieldset>Edit user info</fieldset>
-          <div>
-            <label htmlFor="username">User name:</label>
-            <input
-              type="text"
-              id="username"
-              value={user}
-              onChange={handleUsernameChange}
-            />
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <div>
-            <label htmlFor="firstname">First name:</label>
-            <input
-              type="text"
-              id="firstname"
-              readOnly="readonly"
-              value={firstname}
-            />
-          </div>
-          <div>
-            <label htmlFor="lastname">Last name:</label>
-            <input
-              type="text"
-              id="lastname"
-              readOnly="readonly"
-              value={lastname}
-            />
-          </div>
-          <div>
-            <button className="edit-button" type="submit">
-              Save
-            </button>
-            <button className="edit-button" type="button" onClick={cancelEdit}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      ) : (
-        <h2>
-          Pseudo changé avec succés ! <br /> Veuillez recharger la page pour le
-          mettre à jour.
-        </h2>
-      )}
+      <form className="envoi" onSubmit={handleFormSubmit}>
+        <fieldset>Edit user info</fieldset>
+        <div>
+          <label htmlFor="username">User name:</label>
+          <input
+            type="text"
+            id="username"
+            onChange={handleUsernameChange}
+            defaultValue={username}
+          />
+        </div>
+        {error && <p className="error-message">{error}</p>}
+        <div>
+          <label htmlFor="firstname">First name:</label>
+          <input
+            type="text"
+            id="firstname"
+            readOnly="readonly"
+            value={firstname}
+          />
+        </div>
+        <div>
+          <label htmlFor="lastname">Last name:</label>
+          <input
+            type="text"
+            id="lastname"
+            readOnly="readonly"
+            value={lastname}
+          />
+        </div>
+        <div>
+          <button className="edit-button" type="submit">
+            Save
+          </button>
+          <button className="edit-button" type="button" onClick={cancelEdit}>
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -3,9 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  token: null,
+  token: sessionStorage.getItem("token")
+    ? sessionStorage.getItem("token")
+    : null,
   currentUser: {},
-  isLoggedIn: false,
+  isLoggedIn: sessionStorage.getItem("token") ? true : false,
   loading: false,
   error: null,
 };
@@ -21,6 +23,7 @@ const userSlice = createSlice({
       state.error = null;
       state.loading = false;
       state.isLoggedIn = false;
+      sessionStorage.clear();
     },
   },
 
@@ -55,6 +58,7 @@ const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(postUserName.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
         state.loading = false;
         state.error = null;
       })
@@ -97,7 +101,7 @@ export const postUserName = createAsyncThunk(
         },
       }
     );
-    return data;
+    return data.body;
   }
 );
 

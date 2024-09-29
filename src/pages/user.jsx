@@ -10,7 +10,6 @@ export default function User() {
   const currentUser = useSelector((state) => state.currentUser);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  //localStorage.getItem("apiResponse");
 
   useEffect(() => {
     dispatch(getUser(token));
@@ -40,6 +39,7 @@ export default function User() {
             firstname={currentUser.firstName || ""}
             lastname={currentUser.lastName || ""}
             cancelEdit={() => setIsOpen(false)}
+            username={currentUser.userName || ""}
           />
         )}
         <h2 className="sr-only">Accounts</h2>

@@ -7,33 +7,41 @@ import { login } from "../slice/userSlice";
 import { useState, useEffect } from "react";
 
 export default function Connect() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(localStorage.getItem("email" || ""));
+  const [password, setPassword] = useState(
+    localStorage.getItem("password" || "")
+  );
   const [error, setError] = useState("");
-  const [checked, isChecked] = useState(true);
+  const [checked, isChecked] = useState(
+    localStorage.getItem("rememberMe") === "true" || false
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
+  useEffect(() => {
+    if (checked) {
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
+      localStorage.setItem("rememberMe", checked);
+    } else {
+      localStorage.clear();
+    }
+  }, [checked, email, password]);
 
   const handleCLick = (e) => {
     e.preventDefault();
 
     dispatch(login({ email, password })).then((response) => {
       if (response.payload) {
+        sessionStorage.setItem("token", response.payload.token);
         navigate(`/connect/user`);
       } else {
         setError("Erreur sur le mot de passe ou l'identifiant.");
       }
     });
   };
-
-  //permet de ne pas afficher la page connect lorsque l'utilisateur est connecté
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  }, [isLoggedIn, navigate]);
 
   return (
     <div className="body">
@@ -48,6 +56,7 @@ export default function Connect() {
                 type="text"
                 id="username"
                 onChange={(e) => setEmail(e.target.value)}
+                defaultValue={email}
               />
             </div>
             <div className="input-wrapper">
@@ -56,10 +65,16 @@ export default function Connect() {
                 type="password"
                 id="password"
                 onChange={(e) => setPassword(e.target.value)}
+                defaultValue={password}
               />
             </div>
             <div className="input-remember">
-              <input type="checkbox" id="remember-me" />
+              <input
+                type="checkbox"
+                id="remember-me"
+                onChange={() => isChecked(!checked)}
+                checked={checked}
+              />
               <label htmlFor="remember-me">Remember me</label>
             </div>
             <button onClick={handleCLick} className="sign-in-button">
