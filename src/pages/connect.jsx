@@ -44,8 +44,8 @@ export default function Connect() {
   };
 
   return (
-    <div className="body">
-      <main className="main bg-dark">
+   
+      <main className="main bg-dark body">
         <section className="sign-in-content">
           <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
           <h1>Sign In</h1>
@@ -84,6 +84,6 @@ export default function Connect() {
           </form>
         </section>
       </main>
-    </div>
+   
   );
 }

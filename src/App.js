@@ -8,22 +8,24 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-
 function App() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  
 
   return (
     <Router>
       <Header />
       <Routes>
+      <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/*" element={<Error />} />
-        
+
         {isLoggedIn ? (
           <>
             <Route path="connect/user" element={<User />} />
-            <Route path="/connect" element={<Navigate to='/connect/user' replace />} />
+            <Route
+              path="/connect"
+              element={<Navigate to="/connect/user" replace />}
+            />
           </>
         ) : (
           <>

@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
     });
 
-    builder.addCase(login.rejected, (state, action) => {
+    builder.addCase(login.rejected, (state) => {
       state.token = null;
       state.error = "error";
       state.isLoggedIn = false;
@@ -48,6 +48,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.currentUser = action.payload;
         state.error = null;
+        state.isLoggedIn=true;
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
@@ -59,6 +60,7 @@ const userSlice = createSlice({
       })
       .addCase(postUserName.fulfilled, (state, action) => {
         state.currentUser = action.payload;
+        state.isLoggedIn=true;
         state.loading = false;
         state.error = null;
       })
@@ -105,5 +107,5 @@ export const postUserName = createAsyncThunk(
   }
 );
 
-export const { logout, setToken } = userSlice.actions;
+export const { logout } = userSlice.actions;
 export default userSlice.reducer;

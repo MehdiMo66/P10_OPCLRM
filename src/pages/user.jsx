@@ -15,50 +15,49 @@ export default function User() {
     dispatch(getUser(token));
   }, [dispatch, token]);
 
+
   return (
-    <div className="body">
-      <main className="main bg-dark">
-        {isOpen ? null : (
-          <div className="header">
-            <h1>
-              Welcome back
-              <br />
-              {currentUser.firstName} {currentUser.lastName}
-            </h1>
-            <button
-              className="edit-button"
-              type="button"
-              onClick={() => setIsOpen(true)}
-            >
-              Edit Name
-            </button>
-          </div>
-        )}
-        {isOpen && (
-          <Edit
-            firstname={currentUser.firstName || ""}
-            lastname={currentUser.lastName || ""}
-            cancelEdit={() => setIsOpen(false)}
-            username={currentUser.userName || ""}
-          />
-        )}
-        <h2 className="sr-only">Accounts</h2>
-        <Box
-          title="Argent Bank Checking (x8349)"
-          amount="$2,082.79"
-          description="Available Balance"
+    <main className="main bg-dark body">
+      {isOpen ? null : (
+        <div className="header">
+          <h1>
+            Welcome back
+            <br />
+            {currentUser.firstName} {currentUser.lastName}
+          </h1>
+          <button
+            className="edit-button"
+            type="button"
+            onClick={() => setIsOpen(true)}
+          >
+            Edit Name
+          </button>
+        </div>
+      )}
+      {isOpen && (
+        <Edit
+          firstname={currentUser.firstName || ""}
+          lastname={currentUser.lastName || ""}
+          cancelEdit={() => setIsOpen(false)}
+          username={currentUser.userName || ""}
         />
-        <Box
-          title="Argent Bank Savings (x6712)"
-          amount="$10,928.42"
-          description="Available Balance"
-        />
-        <Box
-          title="Argent Bank Credit Card (x8349)"
-          amount="$184.30"
-          description="Current Balance"
-        />
-      </main>
-    </div>
+      )}
+      <h2 className="sr-only">Accounts</h2>
+      <Box
+        title="Argent Bank Checking (x8349)"
+        amount="$2,082.79"
+        description="Available Balance"
+      />
+      <Box
+        title="Argent Bank Savings (x6712)"
+        amount="$10,928.42"
+        description="Available Balance"
+      />
+      <Box
+        title="Argent Bank Credit Card (x8349)"
+        amount="$184.30"
+        description="Current Balance"
+      />
+    </main>
   );
 }

@@ -18,7 +18,6 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
   const handleUsernameChange = (e) => {
     setUser(e.target.value);
     setError("");
-    
   };
 
   const handleFormSubmit = (e) => {
@@ -40,7 +39,7 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
       dispatch(postUserName({ token, userName: user }));
       setUser("");
       setSubmitted(true);
-      cancelEdit()
+      cancelEdit();
     } else {
       if (user.length < 4) {
         setError("Le nom d'utilisateur doit contenir au moins 4 caractères.");

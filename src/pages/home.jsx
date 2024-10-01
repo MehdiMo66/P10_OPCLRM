@@ -6,8 +6,8 @@ import "../assets/style/main.css";
 
 export default function Home() {
   return (
-    <div className="body">
-      <main>
+  
+      <main className="body">
         <div className="hero">
           <section className="hero-content">
             <h2 className="sr-only">Promoted Content</h2>
@@ -40,6 +40,6 @@ export default function Home() {
           />
         </section>
       </main>
-    </div>
+   
   );
 }
