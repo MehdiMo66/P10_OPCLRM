@@ -6,7 +6,7 @@ const initialState = {
   token: sessionStorage.getItem("token")
     ? sessionStorage.getItem("token")
     : null,
-  currentUser: {},
+  currentUser: JSON.parse(sessionStorage.getItem("currentUser")) || {},
   isLoggedIn: sessionStorage.getItem("token") ? true : false,
   loading: false,
   error: null,

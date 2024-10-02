@@ -12,9 +12,12 @@ export default function User() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser(token));
-  }, [dispatch, token]);
-
+    dispatch(getUser(token, currentUser)).then((reponse) => {
+      if (reponse.payload) {
+        sessionStorage.setItem("currentUser", JSON.stringify(reponse.payload));
+      }
+    });
+  }, [dispatch, token, currentUser]);
 
   return (
     <main className="main bg-dark body">
