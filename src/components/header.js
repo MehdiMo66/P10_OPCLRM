@@ -7,10 +7,10 @@ import { logout } from "../slice/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function Header() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = useSelector((state) => state.currentUser);
+
 
   const dispatch = useDispatch();
   const handleLogout = () => {
