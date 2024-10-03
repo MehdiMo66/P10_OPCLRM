@@ -28,17 +28,20 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.token = action.payload.token;
-      state.error = false;
-      state.isLoggedIn = true;
-    });
-
-    builder.addCase(login.rejected, (state) => {
-      state.token = null;
-      state.error = "error";
-      state.isLoggedIn = false;
-    });
+    builder
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+        state.error = false;
+        state.isLoggedIn = true;
+      })
+      .addCase(login.rejected, (state) => {
+        state.token = null;
+        state.error = "error";
+        state.isLoggedIn = false;
+      });
 
     builder
       .addCase(getUser.pending, (state) => {
@@ -54,6 +57,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+      
     builder
       .addCase(postUserName.pending, (state) => {
         state.loading = true;
