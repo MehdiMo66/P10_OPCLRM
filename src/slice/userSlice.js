@@ -57,7 +57,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-      
+
     builder
       .addCase(postUserName.pending, (state) => {
         state.loading = true;
@@ -80,7 +80,9 @@ export const login = createAsyncThunk("userSlice/login", async (userData) => {
     "http://localhost:3001/api/v1/user/login",
     userData
   );
+  console.log(data.body)
   return data.body;
+  
 });
 
 export const getUser = createAsyncThunk("user/getUser", async (token) => {

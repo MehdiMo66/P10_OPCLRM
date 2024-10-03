@@ -15,10 +15,6 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
     setUser(username || "");
   }, [username]);
 
-  const handleUsernameChange = (e) => {
-    setUser(e.target.value);
-    setError("");
-  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +62,7 @@ export default function Edit({ username, firstname, lastname, cancelEdit }) {
           <input
             type="text"
             id="username"
-            onChange={handleUsernameChange}
+            onChange={(e)=> setUser(e.target.value)}
             defaultValue={username}
           />
         </div>
