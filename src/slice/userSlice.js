@@ -80,9 +80,7 @@ export const login = createAsyncThunk("userSlice/login", async (userData) => {
     "http://localhost:3001/api/v1/user/login",
     userData
   );
-  console.log(data.body)
   return data.body;
-  
 });
 
 export const getUser = createAsyncThunk("user/getUser", async (token) => {
