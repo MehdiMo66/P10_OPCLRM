@@ -40,7 +40,6 @@ export default function Connect() {
               type="text"
               id="username"
               onChange={(e) => setEmail(e.target.value)}
-              defaultValue={email}
             />
           </div>
           <div className="input-wrapper">
@@ -49,7 +48,6 @@ export default function Connect() {
               type="password"
               id="password"
               onChange={(e) => setPassword(e.target.value)}
-              defaultValue={password}
             />
           </div>
           <div className="input-remember">
